@@ -167,6 +167,8 @@ class ClasificacionDlg(QtGui.QWidget):
                 self.objeto.caracteristicas[i].valor=self.tableWidgetObjeto.item(i,1).text()
             elif self.objeto.caracteristicas[i].atributo.tipo=='int':
                 self.objeto.caracteristicas[i].valor=int(self.tableWidgetObjeto.item(i,1).text())
+            elif self.objeto.caracteristicas[i].atributo.tipo=='boleano':
+                self.objeto.caracteristicas[i].valor=bool(self.tableWidgetObjeto.item(i,1).text() == "True")
 
         for at in self.objeto.caracteristicas:
             print at.atributo.nombre, at.valor
