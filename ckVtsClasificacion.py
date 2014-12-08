@@ -121,7 +121,7 @@ class ClasificacionDlg(QtGui.QWidget):
         #print self.cc[row].nombre
         #print self.cc[row].descripcion()
         self.plainTextEditDescripcionClases.clear()
-        self.plainTextEditDescripcionClases.appendPlainText(self.clases_candidatas[row].description())
+        self.plainTextEditDescripcionClases.appendPlainText(self.objeto.clases_candidatas[row].description())
         pass
 
     def change_table_cell(self, *args):
