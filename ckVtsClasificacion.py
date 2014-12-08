@@ -46,7 +46,7 @@ class ClasificacionDlg(QtGui.QWidget):
                 combobox = QtGui.QComboBox()
                 combobox.addItem('True') 
                 combobox.addItem('False') 
-                self.tableWidgetPosiblesFallos.setCellWidget(i, 1, combobox)
+#                self.tableWidgetPosiblesFallos.setCellWidget(i, 1, combobox)
             self.tableWidgetObjeto.setItem(i, 0, item1)#Establecemos el item en la columna 0
             if  isinstance(at.valor,int):
                 item2 = QtGui.QTableWidgetItem(str(at.valor))
