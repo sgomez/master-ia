@@ -20,5 +20,7 @@ class Caracteristica():
             self.valor = str(valor)
         elif self.atributo.tipo == 'bool' or self.atributo.tipo == 'boleano':
             self.valor = bool(valor)
+        elif self.atributo.tipo == 'float':
+            self.valor = float(valor)
         else:
             raise TypeError('Tipo de atributo desconocido')
