@@ -12,3 +12,13 @@ class Caracteristica():
 
         self.atributo = atributo
         self.valor = valor
+
+    def set_valor(self, valor):
+        if self.atributo.tipo == 'int':
+            self.valor = int(valor)
+        elif self.atributo.tipo == 'str':
+            self.valor = str(valor)
+        elif self.atributo.tipo == 'bool' or self.atributo.tipo == 'boleano':
+            self.valor = bool(valor)
+        else:
+            raise TypeError('Tipo de atributo desconocido')
