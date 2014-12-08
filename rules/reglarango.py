@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'sergio'
-
 from rules import Regla
 
 class ReglaRango(Regla):

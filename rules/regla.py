@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'sergio'
-
 from abc import ABCMeta, abstractmethod
 from model import Caracteristica
 
