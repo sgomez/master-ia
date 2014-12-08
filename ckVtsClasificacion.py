@@ -54,6 +54,9 @@ class ClasificacionDlg(QtGui.QWidget):
             elif at.atributo.tipo == 'int':
                 celda_valor.setText(str(at.valor))
                 celda_valor.editingFinished.connect(self.changeTableCell)
+            elif at.atributo.tipo == 'float':
+                celda_valor.setText(str(at.valor))
+                celda_valor.editingFinished.connect(self.changeTableCell)
             elif at.atributo.tipo == 'str':
                 celda_valor.setText(at.valor)
                 celda_valor.editingFinished.connect(self.changeTableCell)
