@@ -15,7 +15,7 @@ class Clase():
         '''
         self.atributos = {}
         self.nombre = nombre #La clase tiene un nombre
-        self.reglas = {}
+        self.reglas = []
 
     def add_attribute(self, atributo):
         if not isinstance(atributo, Atributo):
@@ -32,7 +32,7 @@ class Clase():
         if not isinstance(regla, Regla):
             raise TypeError()
 
-        self.reglas[regla.idRegla] = regla
+        self.reglas.append(regla)
 
 
     def get_rule(self, idRegla):
@@ -45,7 +45,8 @@ class Clase():
         '''
 
         msg = "Clase: %s\n" % (self.nombre)
-        for k, r in self.reglas.iteritems():
+
+        for r in self.reglas:
             msg += "- Regla: %s\tTipo: %s\tAtributo: %s\tValor esperado: %s\n" \
                    % (r.idRegla, r.get_type(), r.atributo.nombre, r.valorEsperado)
 

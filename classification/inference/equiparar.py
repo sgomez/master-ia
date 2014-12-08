@@ -29,7 +29,7 @@ class Equiparar(Inferencia):
 
             explicacion += "\t  Equiparar el atributo %s=%s" % (nv.atributo.nombre, nv.valor)
 
-            for idRegla, regla in self.candidata.reglas.iteritems():
+            for regla in self.candidata.reglas:
                 print "Regla: %s Tipo: %s" % (regla.idRegla, regla.get_type())
                 if regla.atributo.nombre == nv.atributo.nombre:
                     if regla.execute(nv):
