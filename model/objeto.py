@@ -4,12 +4,13 @@ __author__ = 'sergio'
 from model import Caracteristica
 
 class Objeto():
-    def __init__(self, id, clase):
+    def __init__(self, id, clase, clases_candidatas):
         '''Se inicia la clase especificando el nombre y los atributos del objeto'''
 
         self.caracteristicas = []
         self.clase = clase
         self.identificador = id
+        self.clases_candidatas = clases_candidatas
 
     def describeObjeto(self):
         print "Identificador: %s\n" % self.identificador

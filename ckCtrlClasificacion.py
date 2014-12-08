@@ -24,6 +24,3 @@ def eventClasificar(clasificacionDlg):
     clasificacionDlg.listWidgetClasesSeleccionadas.addItems(cs) #Se añaden las clases resultado de la clasificación 
                                                                 # al control listbox para que lo presente.
     return
-        
-
-
