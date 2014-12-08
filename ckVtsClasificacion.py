@@ -33,26 +33,34 @@ class ClasificacionDlg(QtGui.QWidget):
         for at in objeto.caracteristicas:
             print "Característica: Atributo=%s Valor=%s" % (at.atributo.nombre, at.valor)
             print  at.atributo.nombre,at.atributo.tipo, at.valor,type(at.valor),at.atributo.unidad#,
-            item1 = QtGui.QTableWidgetItem(at.atributo.nombre) #Crea un item y le asigna el nombre de la observable
-            #item1.setCheckState(QtCore.Qt.Checked) # Establece propiedades a las celdas de la primera columna de la tabla
-            item1.setFlags(QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled) #Establece propiedades a las celdas de la primera columna
 
-            if at.atributo.tipo=='multiple':#Si el tipo de observable es múltiple creamos un combox
-                combobox = QtGui.QComboBox()
-                #for j in observables[i].valoresPermitidos:#añadimmos al combox los valeores permitidos
-                 #   combobox.addItem(j) 
-                #self.tableWidgetPosiblesFallos.setCellWidget(i, 1, combobox)#Establecemos en la celda i el combox
-            elif at.atributo.tipo=='boleano':#Si es boleano creamos otro combox con dos posibles valores
-                combobox = QtGui.QComboBox()
-                combobox.addItem('True') 
-                combobox.addItem('False') 
-#                self.tableWidgetPosiblesFallos.setCellWidget(i, 1, combobox)
-            self.tableWidgetObjeto.setItem(i, 0, item1)#Establecemos el item en la columna 0
-            if  isinstance(at.valor,int):
-                item2 = QtGui.QTableWidgetItem(str(at.valor))
-            elif  isinstance(at.valor,str):
-                item2 = QtGui.QTableWidgetItem(at.valor)
-            self.tableWidgetObjeto.setItem(i, 1, item2)#Establecemos el item en la columna 0
+            # Atributo
+            celda_nombre = QtGui.QTableWidgetItem(at.atributo.nombre)
+            celda_nombre.setFlags(QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled)
+            self.tableWidgetObjeto.setItem(i, 0, celda_nombre)
+
+            # Valor
+            celda_valor = QtGui.QLineEdit()
+            celda_valor.row = i
+
+            if at.atributo.tipo=='boleano':
+                celda_valor = QtGui.QComboBox()
+                celda_valor.row = i
+                celda_valor.addItem('False')
+                celda_valor.addItem('True')
+                celda_valor.activated.connect(self.changeTableCell)
+                if at.valor == True:
+                    celda_valor.setCurrentIndex(1)
+            elif at.atributo.tipo == 'int':
+                celda_valor.setText(str(at.valor))
+                celda_valor.editingFinished.connect(self.changeTableCell)
+            elif at.atributo.tipo == 'str':
+                celda_valor.setText(at.valor)
+                celda_valor.editingFinished.connect(self.changeTableCell)
+            else:
+                raise AttributeError('Tupo de atributo desconocido')
+
+            self.tableWidgetObjeto.setCellWidget(i, 1, celda_valor)
             i+=1
         
         #List
@@ -127,7 +135,6 @@ class ClasificacionDlg(QtGui.QWidget):
         #Conexiones:
         #==========
         self.listWidgetClasesCandidatas.itemClicked.connect(self.showCc)
-        self.tableWidgetObjeto.itemChanged.connect(self.changeObj)
         #self.generarButtom.clicked.connect(self.generar)
         self.clasificarButtom.clicked.connect(self.clasificar)
         self.salirButtom.clicked.connect(self.close)
@@ -151,29 +158,26 @@ class ClasificacionDlg(QtGui.QWidget):
         self.plainTextEditDescripcionClases.clear()
         self.plainTextEditDescripcionClases.appendPlainText(self.cc[row].description())
         pass
-    
-    def changeObj(self):
-        '''
-        Cambia los valores del objeto tomando los datos de la tabla.
-        '''
-        print 'objeto cambiado'
-        for i in range(self.tableWidgetObjeto.rowCount()):
-        #print i
-            item1=self.tableWidgetObjeto.item(i,0)
-            item2=self.tableWidgetObjeto.item(i,1)
-            #print item1, item1.text(),self.objeto.atributos[i].nombre,self.objeto.atributos[i].valor
-            #print item2, item2.text()
-            if self.objeto.caracteristicas[i].atributo.tipo=='str':
-                self.objeto.caracteristicas[i].valor=self.tableWidgetObjeto.item(i,1).text()
-            elif self.objeto.caracteristicas[i].atributo.tipo=='int':
-                self.objeto.caracteristicas[i].valor=int(self.tableWidgetObjeto.item(i,1).text())
-            elif self.objeto.caracteristicas[i].atributo.tipo=='boleano':
-                self.objeto.caracteristicas[i].valor=bool(self.tableWidgetObjeto.item(i,1).text() == "True")
+
+    def changeTableCell(self, *args):
+        item = self.sender()
+        index = item.row
+        value = None
+
+        if isinstance(item, QtGui.QLineEdit):
+            print "Cambia QLineEdit"
+            value = item.text()
+        elif isinstance(item, QtGui.QComboBox):
+            print "Cambia QComboBox"
+            value = args[0]
+        else:
+            raise AttributeError('Tipo de Widget desconocido')
+
+        self.objeto.caracteristicas[index].set_valor(value)
 
         for at in self.objeto.caracteristicas:
             print at.atributo.nombre, at.valor
-            pass
-    
+
     def clasificar(self):
         print 'clasificar'
         ctrl.eventClasificar(self)
