@@ -17,7 +17,7 @@ class Equiparar(Inferencia):
         Equipara una clase candidata con el conjunto de nuevos
         valores devolviendo False si es rechazada la clase candidata.
         '''
-        explicacion = ""
+        explicacion = []
 
         print "*** Ejecución de la inferencia equiparar"
         print
@@ -27,15 +27,16 @@ class Equiparar(Inferencia):
             print "Equiparando el atributo/valor del objeto %s=%s con la clase candidata %s" \
                   % (nv.atributo.nombre, nv.valor, self.candidata.nombre)
 
-            explicacion += "\t  Equiparar el atributo %s=%s" % (nv.atributo.nombre, nv.valor)
-
             for regla in self.candidata.reglas:
                 print "Regla: %s Tipo: %s" % (regla.idRegla, regla.get_type())
                 if regla.atributo.nombre == nv.atributo.nombre:
                     if regla.execute(nv):
+                        explicacion.append([self.candidata.nombre, nv.atributo.nombre, nv.valor, regla.valorEsperado, True])
                         continue
                     else:
+                        explicacion.append([self.candidata.nombre, nv.atributo.nombre, nv.valor, regla.valorEsperado, False])
                         return False, explicacion
                 else:
                     print 'Regla no aplicable a este atributo\n'
+
         return True, explicacion

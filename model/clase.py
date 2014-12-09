@@ -44,10 +44,15 @@ class Clase():
         Devuelve el texto de la descripción de una clase.
         '''
 
-        msg = "Clase: %s\n" % (self.nombre)
+        msg = "Clase: %s<br/>" % (self.nombre)
+        msg += '<table class="table">';
+        msg += "<tr><th>Regla</th><th>Tipo</th><th>Atributo</th><th>Valor esperado</th></tr>"
 
         for r in self.reglas:
-            msg += "- Regla: %s\tTipo: %s\tAtributo: %s\tValor esperado: %s\n" \
+            msg += "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td>" \
                    % (r.idRegla, r.get_type(), r.atributo.nombre, r.valorEsperado)
+
+        msg += "</table>";
+
 
         return msg

@@ -18,7 +18,7 @@ class Poda():
         clases_candidatas = generar.execute()
         atributos_usados = []
         nuevos_valores = []
-        msg = u"Se generan las clases candidatas que son: %s\n" % ([clase.nombre for clase in clases_candidatas])
+        msg = '<p class="head">Se generan las clases candidatas que son: %s</p>' % ([clase.nombre for clase in clases_candidatas])
 
         found = False
 
@@ -33,25 +33,32 @@ class Poda():
                 atributos_usados = nuevo_atributo[1]
                 print " Nuevo atributo seleccionado: %s\n" % (nuevo_atributo[0].nombre)
                 print " Atributos usados: %s\n" % ([item.nombre for item in atributos_usados])
-                msg += "Seleccionamos el atributo %s " % nuevo_atributo[0].nombre
 
                 obtener = inference.Obtener(self.obj, nuevo_atributo[0])
                 caracteristica = obtener.execute()
+
                 print " Atributo y valor del objeto: %s= %s" % (caracteristica.atributo.nombre, caracteristica.valor)
-                msg += "con el valor: %s\n" % (caracteristica.valor)
+                msg += '<p class="select">Seleccionamos el atributo <strong>%s</strong> con el valor <strong>%s</strong></p>' % (caracteristica.atributo.nombre, caracteristica.valor)
 
                 nuevos_valores.append(caracteristica)
 
                 nuevas_candidatas = []
+
+                msg += '<table>'
+                msg += '<thead><tr><th>Clase</th><th>Atributo</th><th>Valor</th><th>Valor esperado</th><th>Resultado</th></tr></thead>'
+                msg += '<tbody>'
+
                 for clase in clases_candidatas:
                     print "Probamos a equipara la clase %s con el conjunto de nuevos pares atributos/valores %s" \
                         % (clase.nombre, [item.atributo.nombre for item in nuevos_valores])
-                    msg += "\t- Probamos la clase candidata %s\n" % clase.nombre
 
                     equiparar = inference.Equiparar(clase, nuevos_valores)
                     resultado, explicacion = equiparar.execute()
-                    msg += explicacion
-                    msg += "\t  Resultado de equiparar la clase %s: %s\n" % (clase.nombre, resultado)
+                    estado = 'pass' if resultado else 'nopass'
+
+                    for item in explicacion:
+                        msg += '<tr class="%s"><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' \
+                               % (estado, item[0], item[1], item[2], item[3], item[4])
 
                     if resultado == True:
                         nuevas_candidatas.append(clase)
@@ -62,9 +69,8 @@ class Poda():
                 continue
 
             clases_candidatas = nuevas_candidatas
-            msg += u"Clases candidatas tras la equiparación:\n"
-            for clase in clases_candidatas:
-                msg += u"Nombre: %s Descripción: %s\n" % (clase.nombre, clase.description())
-            msg += "\n"
+            msg += '</tbody>'
+            msg += '</table>'
+            msg += '<p class="head">Clases candidatas tras la equiparaci&oacute;n: %s</p>' % ([clase.nombre for clase in clases_candidatas])
 
         return clases_candidatas, msg

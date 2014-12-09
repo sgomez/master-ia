@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Clasificador</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="2">
+       <widget class="QLabel" name="lblDescripcionTareas">
+        <property name="text">
+         <string>Descripción de las tareas</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QComboBox" name="boxBaseConocimiento"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="lblMetodo">
+        <property name="text">
+         <string>Método</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QListWidget" name="lstClasesSeleccionadas"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblBaseConocimiento">
+        <property name="text">
+         <string>Base de conocimiento</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lblClasesSeleccionadas">
+        <property name="text">
+         <string>Clases seleccionadas</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lblClasesCandidatas">
+        <property name="text">
+         <string>Clases candidatas</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QComboBox" name="boxMetodo">
+        <item>
+         <property name="text">
+          <string>Poda</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="1" rowspan="3">
+       <widget class="QListWidget" name="lstClasesCandidatas"/>
+      </item>
+      <item row="1" column="2" rowspan="3">
+       <widget class="QTextEdit" name="txtDescripcionTareas"/>
+      </item>
+      <item row="5" column="1" rowspan="3" colspan="2">
+       <widget class="QTextEdit" name="txtJustificacionClasificacion"/>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lblJustificacionClasificacion">
+        <property name="text">
+         <string>Justificación de la clasificación</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lblObjeto">
+        <property name="text">
+         <string>Objeto</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QTableWidget" name="tblObjeto">
+        <column>
+         <property name="text">
+          <string>Atributo</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Valor</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnClasificar">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Clasificar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnBorrar">
+        <property name="text">
+         <string>Borrar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSalir">
+        <property name="text">
+         <string>Salir</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
