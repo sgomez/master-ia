@@ -14,4 +14,4 @@ class Reptil(Animal):
         self.add_rule(rules.ReglaIgual('r4', self.get_attribute('vuela'), False))
         self.add_rule(rules.ReglaIgual('r5', self.get_attribute('columna'), True))
         self.add_rule(rules.ReglaIgual('r6', self.get_attribute('aletas'), False))
-        self.add_rule(rules.ReglaIgual('r7', self.get_attribute('patas'), 0)) #0, 4
+        self.add_rule(rules.ReglaEntre('r7', self.get_attribute('patas'), [0, 4])) #0, 4

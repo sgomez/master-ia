@@ -16,4 +16,4 @@ class Invertebrado(Animal):
         self.add_rule(rules.ReglaIgual('r6', self.get_attribute('dentado'), False))
         self.add_rule(rules.ReglaIgual('r7', self.get_attribute('columna'), False))
         self.add_rule(rules.ReglaIgual('r8', self.get_attribute('aletas'), False))
-        self.add_rule(rules.ReglaIgual('r9', self.get_attribute('patas'), 4)) #0, 4, 5, 6, 8
+        self.add_rule(rules.ReglaEntre('r9', self.get_attribute('patas'), [0, 4, 5, 6, 8])) #0, 4, 5, 6, 8
