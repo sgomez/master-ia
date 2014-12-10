@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from controller import CtrlMainWindow
 from model import Objeto
-from model.fruto import Fruto , classes as cfruto
+from model.fruto import Fruto, classes as cfruto
 from model.wine import Vino, classes as cvino
-from model.zoo import Animal , classes as canimal
+from model.zoo import Animal, classes as canimal
 from PyQt4 import QtGui
-import ctrlClasificacion
+import resources
 import sys
+
 
 fruto = Fruto('fruto')
 ob1 = Objeto('Fruto', fruto, cfruto)
@@ -46,5 +48,5 @@ ob3.add_feature("Sulfatos", 0.6)
 ob3.add_feature("Alcohol", 11.1)
 
 app = QtGui.QApplication(sys.argv)
-form = ctrlClasificacion.ctrlClasificacion([ob1, ob2, ob3])
+form = CtrlMainWindow([ob1, ob2, ob3])
 sys.exit(app.exec_())

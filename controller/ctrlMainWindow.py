@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtCore, QtGui
-import appResources
 import classification.method as method
 import services
 import views
 
 
-class ctrlClasificacion(QtGui.QMainWindow, views.Ui_MainWindow):
+class CtrlMainWindow(QtGui.QMainWindow, views.Ui_MainWindow):
 
     def __init__(self, objetos):
         QtGui.QMainWindow.__init__(self)
@@ -149,7 +148,7 @@ class ctrlClasificacion(QtGui.QMainWindow, views.Ui_MainWindow):
         # Cargas hojas de estilo
         self.htmlDescripcionClase = QtGui.QTextDocument()
         self.htmlExplication = QtGui.QTextDocument()
-        css = QtCore.QFile(':/resources/css/style.css')
+        css = QtCore.QFile(':/style.css')
         css.open(QtCore.QIODevice.ReadOnly)
         if css.isOpen():
             style = QtCore.QVariant(css.readAll()).toString()

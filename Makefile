@@ -1,7 +1,10 @@
-all: appResources.py views/mainWindow.py
+all: resources.py views/mainWindow.py
 
-appResources.py: appResources.qrc
-	pyrcc4 -o appResources.py appResources.qrc
+clean:
+	rm -f resources.py views/mainWindow.py
 
-views/mainWindow.py: views/mainWindow.ui
-	pyuic4 -o views/mainWindow.py views/mainWindow.ui
+resources.py: resources/config/resources.qrc
+	pyrcc4 -o resources.py resources/config/resources.qrc
+
+views/mainWindow.py: resources/views/mainWindow.ui
+	pyuic4 -o views/mainWindow.py resources/views/mainWindow.ui
