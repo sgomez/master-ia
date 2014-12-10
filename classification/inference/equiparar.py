@@ -31,10 +31,10 @@ class Equiparar(Inferencia):
                 print "Regla: %s Tipo: %s" % (regla.idRegla, regla.get_type())
                 if regla.atributo.nombre == nv.atributo.nombre:
                     if regla.execute(nv):
-                        explicacion.append([self.candidata.nombre, nv.atributo.nombre, nv.valor, regla.valorEsperado, True])
+                        explicacion.append([self.candidata.nombre, nv.atributo.nombre, nv.valor, regla.get_type(), regla.valorEsperado, True])
                         continue
                     else:
-                        explicacion.append([self.candidata.nombre, nv.atributo.nombre, nv.valor, regla.valorEsperado, False])
+                        explicacion.append([self.candidata.nombre, nv.atributo.nombre, nv.valor, regla.get_type(), regla.valorEsperado, False])
                         return False, explicacion
                 else:
                     print 'Regla no aplicable a este atributo\n'

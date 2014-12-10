@@ -45,7 +45,7 @@ class Poda():
                 nuevas_candidatas = []
 
                 msg += '<table>'
-                msg += '<thead><tr><th>Clase</th><th>Atributo</th><th>Valor</th><th>Valor esperado</th><th>Resultado</th></tr></thead>'
+                msg += '<thead><tr><th>Clase</th><th>Atributo</th><th>Valor</th><th>Regla</th><th>Valor esperado</th><th>Resultado</th></tr></thead>'
                 msg += '<tbody>'
 
                 for clase in clases_candidatas:
@@ -54,11 +54,11 @@ class Poda():
 
                     equiparar = inference.Equiparar(clase, nuevos_valores)
                     resultado, explicacion = equiparar.execute()
-                    estado = 'pass' if resultado else 'nopass'
 
                     for item in explicacion:
-                        msg += '<tr class="%s"><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' \
-                               % (estado, item[0], item[1], item[2], item[3], item[4])
+                        estado = 'pass' if item[5] else 'nopass'
+                        msg += '<tr class="%s"><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' \
+                               % (estado, item[0], item[1], item[2], item[3], item[4], item[5])
 
                     if resultado == True:
                         nuevas_candidatas.append(clase)
