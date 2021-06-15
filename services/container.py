@@ -1,14 +1,11 @@
-#!/usr/bin/env python
-__author__ = 'sergio'
-
-class Container():
+class Container:
 
     _instance = None
     services = {}
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls):
         if not cls._instance:
-            cls._instance = super(Container, cls).__new__(cls, args, kwargs)
+            cls._instance = super(Container, cls).__new__(cls)
         return cls._instance
 
     def get(self, name):

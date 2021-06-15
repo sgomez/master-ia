@@ -13,10 +13,10 @@ class Objeto():
         self.clases_candidatas = clases_candidatas
 
     def describeObjeto(self):
-        print "Identificador: %s\n" % self.identificador
+        print(("Identificador: %s\n" % self.identificador))
         for item in self.caracteristicas:
-            print "- Atributo: %s\tTipo: %s\tValor: %s\tUnidad: %s\n" \
-                  % (item.atributo.nombre, item.atributo.tipo, item.valor, item.atributo.unidad)
+            print(("- Atributo: %s\tTipo: %s\tValor: %s\tUnidad: %s\n" \
+                  % (item.atributo.nombre, item.atributo.tipo, item.valor, item.atributo.unidad)))
 
 
     def add_feature(self, nombre, valor):

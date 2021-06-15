@@ -3,9 +3,7 @@ __author__ = 'sergio'
 
 from abc import ABCMeta, abstractmethod
 
-class Inferencia():
-    __metaclass__ = ABCMeta
-
+class Inferencia(metaclass=ABCMeta):
     @abstractmethod
     def __init__(self): pass
 

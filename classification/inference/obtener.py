@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'sergio'
 
-from inferencia import Inferencia
+from .inferencia import Inferencia
 
 class Obtener(Inferencia):
     '''
@@ -14,8 +14,8 @@ class Obtener(Inferencia):
 
 
     def execute(self):
-        print "*** Ejecución de la inferencia Obtener"
-        print
+        print("*** Ejecución de la inferencia Obtener")
+        print()
         for caracteristica in self.objeto.caracteristicas:
             if self.atributo.nombre == caracteristica.atributo.nombre:
                 return caracteristica

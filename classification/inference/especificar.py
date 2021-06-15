@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'sergio'
 
-from inferencia import Inferencia
+from .inferencia import Inferencia
 
 class Especificar(Inferencia):
     '''Dado un conjunto de clases candidatas no vacío
@@ -22,11 +22,11 @@ class Especificar(Inferencia):
         Ejecución del método de la inferencia
         @return: Devuelve en una tupla el atributo especificado y la lista de atributos ya usados.
         '''
-        print "*** Ejecución de la inferencia Especificar"
-        print
+        print("*** Ejecución de la inferencia Especificar")
+        print()
         if len(self.clases_candidatas) > 0:
             clase = self.clases_candidatas[0]
-            for nombre, atributo in clase.atributos.iteritems():
+            for nombre, atributo in list(clase.atributos.items()):
                 if not nombre in [item.nombre for item in self.atributos_usados]:
                     self.atributos_usados.append(atributo)
                     return (atributo, self.atributos_usados)

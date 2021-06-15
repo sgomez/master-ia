@@ -23,21 +23,21 @@ class Poda():
         found = False
 
         while not found and len(clases_candidatas) > 0:
-            print "inicio while-> Lista de atributos usados: %s\n" % ([item.nombre for item in atributos_usados])
-            print " Clases candidatas: %s\n" % ([clase.nombre for clase in clases_candidatas])
+            print(("inicio while-> Lista de atributos usados: %s\n" % ([item.nombre for item in atributos_usados])))
+            print((" Clases candidatas: %s\n" % ([clase.nombre for clase in clases_candidatas])))
 
             especificar = inference.Especificar(clases_candidatas, atributos_usados)
             nuevo_atributo = especificar.execute()
 
             if not nuevo_atributo == (None, None):
                 atributos_usados = nuevo_atributo[1]
-                print " Nuevo atributo seleccionado: %s\n" % (nuevo_atributo[0].nombre)
-                print " Atributos usados: %s\n" % ([item.nombre for item in atributos_usados])
+                print((" Nuevo atributo seleccionado: %s\n" % (nuevo_atributo[0].nombre)))
+                print((" Atributos usados: %s\n" % ([item.nombre for item in atributos_usados])))
 
                 obtener = inference.Obtener(self.obj, nuevo_atributo[0])
                 caracteristica = obtener.execute()
 
-                print " Atributo y valor del objeto: %s= %s" % (caracteristica.atributo.nombre, caracteristica.valor)
+                print((" Atributo y valor del objeto: %s= %s" % (caracteristica.atributo.nombre, caracteristica.valor)))
                 msg += '<p class="select">Seleccionamos el atributo <strong>%s</strong> con el valor <strong>%s</strong></p>' % (caracteristica.atributo.nombre, caracteristica.valor)
 
                 nuevos_valores.append(caracteristica)
@@ -49,8 +49,8 @@ class Poda():
                 msg += '<tbody>'
 
                 for clase in clases_candidatas:
-                    print "Probamos a equipara la clase %s con el conjunto de nuevos pares atributos/valores %s" \
-                        % (clase.nombre, [item.atributo.nombre for item in nuevos_valores])
+                    print(("Probamos a equipara la clase %s con el conjunto de nuevos pares atributos/valores %s" \
+                        % (clase.nombre, [item.atributo.nombre for item in nuevos_valores])))
 
                     equiparar = inference.Equiparar(clase, nuevos_valores)
                     resultado, explicacion = equiparar.execute()
@@ -62,9 +62,9 @@ class Poda():
 
                     if resultado == True:
                         nuevas_candidatas.append(clase)
-                        print "Clase aceptada: %s" % clase.nombre
+                        print(("Clase aceptada: %s" % clase.nombre))
             else:
-                print "No quedan más atributos por especificar"
+                print("No quedan más atributos por especificar")
                 found = True
                 continue
 

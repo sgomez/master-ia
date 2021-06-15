@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QMetaType
+
 import classification.method as method
 import services
 import views
 
 
-class CtrlMainWindow(QtGui.QMainWindow, views.Ui_MainWindow):
+class CtrlMainWindow(QtWidgets.QMainWindow, views.Ui_MainWindow):
 
     def __init__(self, objetos):
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
 
         self.objetos = objetos
         self.objeto = objetos[0]
@@ -67,20 +69,20 @@ class CtrlMainWindow(QtGui.QMainWindow, views.Ui_MainWindow):
         item = self.sender()
         index = item.row
 
-        if isinstance(item, QtGui.QLineEdit):
-            print "Cambia QLineEdit"
+        if isinstance(item, QtWidgets.QLineEdit):
+            print("Cambia QLineEdit")
             value = item.text()
-        elif isinstance(item, QtGui.QComboBox):
-            print "Cambia QComboBox"
+        elif isinstance(item, QtWidgets.QComboBox):
+            print("Cambia QComboBox")
             value = args[0]
         else:
-            raise AttributeError('Tipo de Widget desconocido')
             value = None
+            raise AttributeError('Tipo de Widget desconocido')
 
         self.objeto.caracteristicas[index].set_valor(value)
 
         for caracteristica in self.objeto.caracteristicas:
-            print caracteristica.atributo.nombre, caracteristica.valor
+            print((caracteristica.atributo.nombre, caracteristica.valor))
 
     def generarListaClasesCandidatas(self):
         """
@@ -107,24 +109,23 @@ class CtrlMainWindow(QtGui.QMainWindow, views.Ui_MainWindow):
 
         for i, at in enumerate(self.objeto.caracteristicas):
             # Atributo
-            celda_nombre = QtGui.QTableWidgetItem(at.atributo.nombre)
+            celda_nombre = QtWidgets.QTableWidgetItem(at.atributo.nombre)
             celda_nombre.setFlags(
                 QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
 
             # Valor
-            celda_valor = QtGui.QLineEdit()
+            celda_valor = QtWidgets.QLineEdit()
             celda_valor.row = i
 
             if at.atributo.tipo == 'boleano':
-                celda_valor = QtGui.QComboBox()
+                celda_valor = QtWidgets.QComboBox()
                 celda_valor.activated.connect(self.cambiaValorAtributoEvent)
                 celda_valor.addItems(['False', 'True'])
                 celda_valor.row = i
                 celda_valor.setCurrentIndex(1 if at.valor is True else 0)
             elif at.atributo.tipo in ['int', 'float', 'str']:
                 celda_valor.setText(str(at.valor))
-                celda_valor.editingFinished.connect(
-                    self.cambiaValorAtributoEvent)
+                celda_valor.editingFinished.connect(self.cambiaValorAtributoEvent)
             else:
                 raise AttributeError('Tipo de atributo desconocido')
 
@@ -151,9 +152,10 @@ class CtrlMainWindow(QtGui.QMainWindow, views.Ui_MainWindow):
         css = QtCore.QFile(':/style.css')
         css.open(QtCore.QIODevice.ReadOnly)
         if css.isOpen():
-            style = QtCore.QVariant(css.readAll()).toString()
-            self.htmlExplication.setDefaultStyleSheet(style)
-            self.htmlDescripcionClase.setDefaultStyleSheet(style)
+            style = QtCore.QVariant(css.readAll())
+            style.convert(QMetaType.QString)
+            self.htmlExplication.setDefaultStyleSheet(style.value())
+            self.htmlDescripcionClase.setDefaultStyleSheet(style.value())
         else:
             raise IOError("Fichero no encontrado")
         css.close()

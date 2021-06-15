@@ -1,1 +1,1 @@
-from ctrlMainWindow import CtrlMainWindow
+from .ctrlMainWindow import CtrlMainWindow

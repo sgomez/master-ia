@@ -2,11 +2,10 @@
 from abc import ABCMeta, abstractmethod
 from model import Caracteristica
 
-class Regla():
+class Regla(metaclass=ABCMeta):
     '''
     Describe aspectos generales de una regla
     '''
-    __metaclass__ = ABCMeta
 
     idRegla = None
     atributo = None

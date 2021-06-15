@@ -4,7 +4,7 @@ __author__ = 'sergio'
 from model import Atributo
 
 class Caracteristica():
-    u'''Clase característica que establece el valor para un atributo'''
+    '''Clase característica que establece el valor para un atributo'''
 
     def __init__(self, atributo, valor):
         if not isinstance(atributo, Atributo):

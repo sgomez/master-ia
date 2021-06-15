@@ -5,12 +5,12 @@ from model import Atributo
 from rules import Regla
 
 class Clase():
-    u'''
+    '''
     Clase en la jerarquía más alta.
     '''
 
     def __init__(self, nombre):
-        u'''
+        '''
         @param: Nombre de la clase.
         '''
         self.atributos = {}
@@ -40,7 +40,7 @@ class Clase():
 
 
     def description(self):
-        u'''
+        '''
         Devuelve el texto de la descripción de una clase.
         '''
 

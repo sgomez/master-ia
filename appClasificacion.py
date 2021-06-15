@@ -1,14 +1,14 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from PyQt5 import QtWidgets
+import views.resources
+import sys
 
 from controller import CtrlMainWindow
 from model import Objeto
 from model.fruto import Fruto, classes as cfruto
 from model.wine import Vino, classes as cvino
 from model.zoo import Animal, classes as canimal
-from PyQt4 import QtGui
-import resources
-import sys
 
 
 fruto = Fruto('fruto')
@@ -47,6 +47,6 @@ ob3.add_feature("pH", 3.3)
 ob3.add_feature("Sulfatos", 0.6)
 ob3.add_feature("Alcohol", 11.1)
 
-app = QtGui.QApplication(sys.argv)
+app = QtWidgets.QApplication(sys.argv)
 form = CtrlMainWindow([ob1, ob2, ob3])
 sys.exit(app.exec_())

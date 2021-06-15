@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'sergio'
 
-from inferencia import Inferencia
+from .inferencia import Inferencia
 import services
 
 class Generar(Inferencia):
@@ -16,6 +16,6 @@ class Generar(Inferencia):
 
 
     def execute(self):
-        print "*** Ejecución de la inferencia Generar"
-        print
+        print("*** Ejecución de la inferencia Generar")
+        print()
         return services.Container().get('clases')
